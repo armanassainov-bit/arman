@@ -96,7 +96,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-slate-900/90 to-slate-950/90" />
         <div className="container-grid relative z-10 flex flex-col gap-6 py-28 sm:py-32">
           <div className="badge max-w-max border-white/20 bg-white/10 text-white/90">
-            Премиальные межкомнатные двери · DoorStyle Studio
+            Tuktuk.astana
           </div>
           <h1 className="max-w-3xl text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
             Двери, которые подчеркивают архитектуру вашего интерьера
