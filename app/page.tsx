@@ -99,7 +99,7 @@ export default function HomePage() {
             Премиальные межкомнатные двери · DoorStyle Studio
           </div>
           <h1 className="max-w-3xl text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-            Двери, которые подчёркивают архитектуру вашего интерьера
+            Двери, которые подчеркивают архитектуру вашего интерьера
           </h1>
           <p className="max-w-2xl text-lg leading-relaxed text-white/75">
             Подбор коллекций для квартир бизнес-класса и частных резиденций. Создаём
