@@ -96,7 +96,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-slate-900/90 to-slate-950/90" />
         <div className="container-grid relative z-10 flex flex-col gap-6 py-28 sm:py-32">
           <div className="badge max-w-max border-white/20 bg-white/10 text-white/90">
-            Премиальные межкомнатные двери · DoorStyle Studio
+            Премиальные межкомнатные двери · Tuk-tuk Studio
           </div>
           <h1 className="max-w-3xl text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
             Двери, которые подчеркивают архитектуру вашего интерьера
@@ -127,7 +127,7 @@ export default function HomePage() {
       <section className="container-grid">
         <div className="grid gap-10 rounded-3xl bg-white/80 p-8 shadow-card backdrop-blur-sm lg:grid-cols-5 lg:items-center">
           <div className="lg:col-span-2">
-            <h2 className="section-title">Почему выбирают DoorStyle</h2>
+            <h2 className="section-title">Почему выбирают Tuk-tuk</h2>
             <p className="section-subtitle">
               Сопровождаем проект от замера до монтажа. Используем решения, которые
               создают эффект встроенной архитектуры.
@@ -359,7 +359,7 @@ export default function HomePage() {
 
       <footer className="container-grid">
         <div className="flex flex-col gap-4 rounded-3xl border border-slate-200/70 bg-white/70 p-8 text-sm text-slate-600 shadow-inner sm:flex-row sm:items-center sm:justify-between">
-          <span>© {new Date().getFullYear()} DoorStyle Studio. Все права защищены.</span>
+          <span>© {new Date().getFullYear()} Tuk-tuk Studio. Все права защищены.</span>
           <span>ИНН 7731234567 · ОГРН 1237746123456</span>
           <a href="#consultation" className="text-primary hover:text-primary-light">
             Политика конфиденциальности
