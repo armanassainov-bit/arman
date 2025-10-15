@@ -6,11 +6,26 @@ import { DoorCard } from "@/components/door-card";
 
 type FilterOption = "all" | Door["style"];
 
-const filters: { label: string; value: FilterOption }[] = [
+const styleFilters: { label: string; value: FilterOption }[] = [
   { label: "Все коллекции", value: "all" },
   { label: "Современные", value: "modern" },
   { label: "Классика", value: "classic" },
   { label: "Лофт", value: "loft" }
+];
+
+const sidebarFilterTitles = [
+  "Цвет",
+  "Остекление",
+  "Новинка",
+  "Хит продаж",
+  "Цвет кромки",
+  "Тип покрытия",
+  "Коллекция",
+  "Тип остекления",
+  "Высота",
+  "Ширина",
+  "Тип помещения",
+  "Замок входит в комплект"
 ];
 
 const benefits = [
@@ -163,37 +178,77 @@ export default function HomePage() {
       </section>
 
       <section id="catalog" className="container-grid">
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4">
           <div>
             <h2 className="section-title">Каталог коллекций</h2>
             <p className="section-subtitle">
-              Подберите двери под стиль Вашего интерьера. Каждую модель можно адаптировать
-              по высоте, толщине и цветовым решениям.
+              Подберите двери под стиль вашего интерьера. Работают фильтры по стилю, а
+              дополнительные параметры появятся в ближайшее время.
             </p>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            {filters.map((filter) => (
-              <button
-                key={filter.value}
-                type="button"
-                onClick={() => setActiveFilter(filter.value)}
-                className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
-                  activeFilter === filter.value
-                    ? "bg-primary text-white shadow-lg shadow-primary/30"
-                    : "bg-white/70 text-slate-600 ring-1 ring-slate-200 hover:bg-white"
-                }`}
-              >
-                {filter.label}
-              </button>
-            ))}
           </div>
         </div>
 
-        <div className="mt-10 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
-          {filteredDoors.map((door) => (
-            <DoorCard key={door.id} door={door} />
-          ))}
+        <div className="mt-10 grid gap-8 lg:grid-cols-[280px_1fr]">
+          <aside className="space-y-6 rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-card backdrop-blur-sm lg:sticky lg:top-28 lg:h-max">
+            <div>
+              <h3 className="text-lg font-semibold text-slate-900">Фильтр каталога</h3>
+              <p className="mt-1 text-sm text-slate-500">
+                Выберите параметры, чтобы увидеть подходящие модели Tuk-tuk.
+              </p>
+            </div>
+
+            <div>
+              <span className="text-xs uppercase tracking-[0.18em] text-primary">
+                Стиль коллекции
+              </span>
+              <div className="mt-3 grid gap-2">
+                {styleFilters.map((filter) => (
+                  <button
+                    key={filter.value}
+                    type="button"
+                    onClick={() => setActiveFilter(filter.value)}
+                    className={`w-full rounded-full border-2 px-4 py-2 text-sm font-semibold transition-all ${
+                      activeFilter === filter.value
+                        ? "border-primary bg-primary text-white shadow-sm shadow-primary/30"
+                        : "border-slate-200 bg-white text-slate-600 hover:border-primary/40 hover:text-primary"
+                    }`}
+                  >
+                    {filter.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setActiveFilter("all")}
+              className="w-full rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-600 transition hover:border-primary/40 hover:text-primary"
+            >
+              Сбросить фильтры
+            </button>
+
+            <div className="space-y-3 border-t border-slate-200 pt-4">
+              {sidebarFilterTitles.map((title) => (
+                <details
+                  key={title}
+                  className="group rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 text-left"
+                >
+                  <summary className="cursor-pointer text-sm font-semibold text-slate-700 transition group-open:text-primary">
+                    {title}
+                  </summary>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                    Опция появится в следующих обновлениях каталога Tuk-tuk.
+                  </p>
+                </details>
+              ))}
+            </div>
+          </aside>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {filteredDoors.map((door) => (
+              <DoorCard key={door.id} door={door} />
+            ))}
+          </div>
         </div>
       </section>
 
