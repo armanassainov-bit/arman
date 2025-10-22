@@ -42,7 +42,7 @@ const benefits = [
   {
     title: "Монтаж под ключ",
     description:
-      "Собственная монтажная служба, чистовые работы за один день, официальная гарантия 3 года."
+      "Собственная монтажная служба, чистовые работы за один день, официальная гарантия 1 год."
   }
 ];
 
@@ -151,7 +151,7 @@ export default function HomePage() {
           <dl className="grid gap-6 sm:grid-cols-2 lg:col-span-3">
             <div className="glass-card p-6">
               <dt className="text-sm uppercase tracking-[0.18em] text-primary">Опыт</dt>
-              <dd className="mt-4 text-3xl font-semibold text-slate-900">13 лет</dd>
+              <dd className="mt-4 text-3xl font-semibold text-slate-900">7 лет</dd>
               <p className="mt-2 text-sm text-slate-500">в дверных решениях премиум-сегмента</p>
             </div>
             <div className="glass-card p-6">
@@ -163,7 +163,7 @@ export default function HomePage() {
             </div>
             <div className="glass-card p-6">
               <dt className="text-sm uppercase tracking-[0.18em] text-primary">Гарантия</dt>
-              <dd className="mt-4 text-3xl font-semibold text-slate-900">3 года</dd>
+              <dd className="mt-4 text-3xl font-semibold text-slate-900">1 год</dd>
               <p className="mt-2 text-sm text-slate-500">на полотно и фурнитуру</p>
             </div>
             <div className="glass-card p-6">
