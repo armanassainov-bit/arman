@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { doors, type Door } from "@/data/doors";
 import { DoorCard } from "@/components/door-card";
 
@@ -42,7 +42,7 @@ const benefits = [
   {
     title: "Монтаж под ключ",
     description:
-      "Собственная монтажная служба, чистовые работы за один день, официальная гарантия 1 год."
+      "Собственная монтажная служба, чистовые работы за один день, официальная гарантия 3 года."
   }
 ];
 
@@ -97,29 +97,6 @@ const contactChannels = [
 
 export default function HomePage() {
   const [activeFilter, setActiveFilter] = useState<FilterOption>("all");
-  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({
-    min: 6000,
-    max: 30000
-  });
-
-  const priceConfig = { min: 0, max: 40000, step: 500, gap: 1000 };
-
-  const formatPrice = (value: number) =>
-    new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 0 }).format(value);
-
-  const handlePriceChange =
-    (type: "min" | "max") =>
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const value = Number(event.target.value);
-      setPriceRange((prev) => {
-        if (type === "min") {
-          const nextMin = Math.min(value, prev.max - priceConfig.gap);
-          return { ...prev, min: Math.max(priceConfig.min, nextMin) };
-        }
-        const nextMax = Math.max(value, prev.min + priceConfig.gap);
-        return { ...prev, max: Math.min(priceConfig.max, nextMax) };
-      });
-    };
 
   const filteredDoors = useMemo(() => {
     if (activeFilter === "all") {
@@ -174,7 +151,7 @@ export default function HomePage() {
           <dl className="grid gap-6 sm:grid-cols-2 lg:col-span-3">
             <div className="glass-card p-6">
               <dt className="text-sm uppercase tracking-[0.18em] text-primary">Опыт</dt>
-              <dd className="mt-4 text-3xl font-semibold text-slate-900">7 лет</dd>
+              <dd className="mt-4 text-3xl font-semibold text-slate-900">13 лет</dd>
               <p className="mt-2 text-sm text-slate-500">в дверных решениях премиум-сегмента</p>
             </div>
             <div className="glass-card p-6">
@@ -186,7 +163,7 @@ export default function HomePage() {
             </div>
             <div className="glass-card p-6">
               <dt className="text-sm uppercase tracking-[0.18em] text-primary">Гарантия</dt>
-              <dd className="mt-4 text-3xl font-semibold text-slate-900">1 год</dd>
+              <dd className="mt-4 text-3xl font-semibold text-slate-900">3 года</dd>
               <p className="mt-2 text-sm text-slate-500">на полотно и фурнитуру</p>
             </div>
             <div className="glass-card p-6">
@@ -211,146 +188,63 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[300px_1fr]">
-          <aside className="space-y-6 rounded-3xl border border-slate-200 bg-white/85 p-6 shadow-card backdrop-blur-sm lg:sticky lg:top-28 lg:h-max">
+        <div className="mt-10 grid gap-8 lg:grid-cols-[280px_1fr]">
+          <aside className="space-y-6 rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-card backdrop-blur-sm lg:sticky lg:top-28 lg:h-max">
             <div>
               <h3 className="text-lg font-semibold text-slate-900">Фильтр каталога</h3>
               <p className="mt-1 text-sm text-slate-500">
-                Уточните параметры, чтобы подобрать подходящие коллекции Tuk-tuk.
+                Выберите параметры, чтобы увидеть подходящие модели Tuk-tuk.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5">
-              <span className="text-xs uppercase tracking-[0.18em] text-primary">Стоимость</span>
-              <div className="mt-4 flex flex-col gap-4">
-                <div className="relative h-1 rounded-full bg-slate-200">
-                  <div
-                    className="absolute inset-y-0 rounded-full bg-primary"
-                    style={{
-                      left: `${(priceRange.min / priceConfig.max) * 100}%`,
-                      right: `${100 - (priceRange.max / priceConfig.max) * 100}%`
-                    }}
-                  />
-                </div>
-                <div className="flex items-center gap-3">
-                  <input
-                    type="range"
-                    min={priceConfig.min}
-                    max={priceConfig.max}
-                    step={priceConfig.step}
-                    value={priceRange.min}
-                    onChange={handlePriceChange("min")}
-                    className="h-1 w-full cursor-pointer appearance-none rounded-full bg-transparent accent-primary"
-                  />
-                  <input
-                    type="range"
-                    min={priceConfig.min}
-                    max={priceConfig.max}
-                    step={priceConfig.step}
-                    value={priceRange.max}
-                    onChange={handlePriceChange("max")}
-                    className="h-1 w-full cursor-pointer appearance-none rounded-full bg-transparent accent-primary"
-                  />
-                </div>
-                <div className="flex items-center justify-between text-sm font-semibold text-slate-700">
-                  <span>{formatPrice(priceRange.min)} ₽</span>
-                  <span>{formatPrice(priceRange.max)} ₽</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              {styleFilters.map((filter) => {
-                const isActive = activeFilter === filter.value;
-                return (
+            <div>
+              <span className="text-xs uppercase tracking-[0.18em] text-primary">
+                Стиль коллекции
+              </span>
+              <div className="mt-3 grid gap-2">
+                {styleFilters.map((filter) => (
                   <button
                     key={filter.value}
                     type="button"
                     onClick={() => setActiveFilter(filter.value)}
-                    className={`flex w-full items-center justify-between gap-4 rounded-2xl border-2 px-4 py-3 text-sm font-semibold transition-all ${
-                      isActive
-                        ? "border-primary bg-primary/10 text-primary"
+                    className={`w-full rounded-full border-2 px-4 py-2 text-sm font-semibold transition-all ${
+                      activeFilter === filter.value
+                        ? "border-primary bg-primary text-white shadow-sm shadow-primary/30"
                         : "border-slate-200 bg-white text-slate-600 hover:border-primary/40 hover:text-primary"
                     }`}
                   >
-                    <span>{filter.label}</span>
-                    <span
-                      className={`flex h-9 w-9 items-center justify-center rounded-full border transition ${
-                        isActive
-                          ? "border-primary bg-primary text-white shadow-primary/40"
-                          : "border-slate-200 bg-white text-primary"
-                      }`}
-                    >
-                      <svg
-                        className="h-4 w-4"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M5.25 3.75L10.25 8L5.25 12.25"
-                          stroke="currentColor"
-                          strokeWidth="1.6"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
+                    {filter.label}
                   </button>
-                );
-              })}
+                ))}
+              </div>
             </div>
 
             <button
               type="button"
               onClick={() => setActiveFilter("all")}
-              className="w-full rounded-full border border-slate-200 bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-600 transition hover:border-primary/40 hover:text-primary"
+              className="w-full rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-600 transition hover:border-primary/40 hover:text-primary"
             >
               Сбросить фильтры
             </button>
 
-            <div className="rounded-2xl border border-slate-200 bg-white/70 p-5">
-              <p className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                Дополнительные параметры
-              </p>
-              <ul className="mt-3 space-y-2">
-                {sidebarFilterTitles.map((title) => (
-                  <li key={title}>
-                    <button
-                      type="button"
-                      className="flex w-full items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-primary/40 hover:text-primary"
-                    >
-                      <span>{title}</span>
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-primary shadow">
-                        <svg
-                          className="h-4 w-4"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M5.25 3.75L10.25 8L5.25 12.25"
-                            stroke="currentColor"
-                            strokeWidth="1.6"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-4 text-xs leading-relaxed text-slate-500">
-                Группы фильтров в разработке. Пока вы можете выбрать стиль коллекции и диапазон
-                стоимости.
-              </p>
+            <div className="space-y-3 border-t border-slate-200 pt-4">
+              {sidebarFilterTitles.map((title) => (
+                <details
+                  key={title}
+                  className="group rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 text-left"
+                >
+                  <summary className="cursor-pointer text-sm font-semibold text-slate-700 transition group-open:text-primary">
+                    {title}
+                  </summary>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                    Опция появится в следующих обновлениях каталога Tuk-tuk.
+                  </p>
+                </details>
+              ))}
             </div>
           </aside>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {filteredDoors.map((door) => (
               <DoorCard key={door.id} door={door} />
             ))}
