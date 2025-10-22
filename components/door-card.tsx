@@ -13,54 +13,60 @@ const styleLabels: Record<Door["style"], string> = {
 
 export function DoorCard({ door }: DoorCardProps) {
   return (
-    <article className="group flex h-full flex-col items-center rounded-[28px] border-2 border-primary/15 bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:shadow-xl">
-      <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-        {styleLabels[door.style]}
-      </span>
-
-      <div className="relative mt-3 w-full max-w-[210px] overflow-hidden rounded-[24px] border border-slate-200 bg-slate-50">
-        <div className="aspect-[3/7] relative">
+    <article className="group relative overflow-hidden rounded-[32px] border border-slate-200 bg-white pb-24 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+      <div className="relative">
+        <div className="aspect-[3/4]">
           <Image
             fill
             src={door.imageUrl}
             alt={door.name}
             className="object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="(min-width: 1280px) 220px, (min-width: 1024px) 18vw, (min-width: 768px) 26vw, 80vw"
+            sizes="(min-width: 1440px) 280px, (min-width: 1024px) 22vw, (min-width: 768px) 32vw, 88vw"
           />
         </div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/10 to-transparent opacity-60 transition-opacity group-hover:opacity-75" />
+        <span className="absolute left-5 top-5 rounded-full bg-white/90 px-4 py-1 text-sm font-semibold text-primary shadow">
+          {door.price}
+        </span>
       </div>
 
-      <p className="mt-5 text-3xl font-semibold text-primary">{door.price}</p>
-      <h3 className="mt-2 text-lg font-semibold text-slate-900">{door.name}</h3>
-      <p className="mt-1 text-sm text-slate-600">{door.finish}</p>
-      <p className="mt-3 text-sm leading-relaxed text-slate-500">{door.description}</p>
-
-      <div className="mt-4 flex items-center justify-center gap-2">
-        {door.colors.map((color) => (
-          <span
-            key={color}
-            className="h-6 w-6 rounded-full border border-slate-200 shadow-inner"
-            style={{ backgroundColor: color }}
-          />
-        ))}
-      </div>
-
-      <div className="mt-5 w-full space-y-3">
-        <button
-          type="button"
-          className="w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-dark"
-        >
-          В корзину
-        </button>
+      <div className="absolute inset-x-5 bottom-5 flex items-center justify-between gap-4 rounded-[26px] bg-white/95 px-5 py-4 shadow-xl transition-transform duration-300 group-hover:translate-y-0">
+        <div>
+          <p className="text-xs uppercase tracking-[0.18em] text-slate-500">{styleLabels[door.style]}</p>
+          <h3 className="mt-1 text-lg font-semibold text-slate-900">{door.name}</h3>
+          <p className="mt-1 text-sm text-slate-600">{door.finish}</p>
+          <div className="mt-3 flex items-center gap-2">
+            {door.colors.map((color) => (
+              <span
+                key={color}
+                className="h-5 w-5 rounded-full border border-white/70 shadow-inner"
+                style={{ backgroundColor: color }}
+              />
+            ))}
+          </div>
+        </div>
         <a
           href="#consultation"
-          className="inline-flex items-center justify-center text-sm font-medium text-primary underline-offset-4 transition hover:text-primary-dark hover:underline"
+          className="flex h-12 w-12 flex-none items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/40 transition hover:bg-primary-dark"
+          aria-label={`Оформить заявку на ${door.name}`}
         >
-          Купить в 1 клик
+          <svg
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M7 4L13 10L7 16"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </a>
       </div>
-
-      <p className="mt-6 text-xs text-slate-500">Срок изготовления: {door.leadTime}</p>
     </article>
   );
 }
