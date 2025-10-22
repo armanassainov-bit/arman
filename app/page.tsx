@@ -82,16 +82,16 @@ const faqs = [
 
 const contactChannels = [
   {
-    label: "Позвонить",
-    value: "+7 (495) 123-45-67"
+    label: "Телефон",
+    value: "87757770014"
   },
   {
-    label: "Telegram",
-    value: "@doorstyle_msk"
+    label: "Email",
+    value: "tuktuk.astana@gmail.com"
   },
   {
     label: "Шоурум",
-    value: "Москва, Павелецкая набережная, 2"
+    value: "Астана, Е509"
   }
 ];
 
